@@ -7,6 +7,46 @@
     <div class="bg-light p-3">
         <h1>Votre panier</h1>
     </div>
+    
+    {% if items | length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+            {% set product, quantity = item.product, item.quantity  %}
+                <tr>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ quantity }}</td>
+                    <td>{{ quantity * product.price }}</td>
+                    <td>
+                     <a href="{{ path('cart_remove',{'id':product.id})}}" class="btn btn-danger btn-sm">
 
+                     <i class="fas fa-trash"></i>
+                     
+                     </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr style="color:blue">
+                    <td colspan="3" class="text-right"  >Total :  </td>
+                    <td>{{ total }}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>   
+    {% else %}
     <p>Surprise, c'est vide !</p>
+        
+    {% endif %}
 {% endblock %}
