@@ -45,3 +45,5 @@ class CartController extends AbstractController
 
     }
 }
+
+# https://symfony.com/doc/current/session.html
